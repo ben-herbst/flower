@@ -10,7 +10,8 @@ class FleetStub:
     def __init__(self, channel: grpc.Channel) -> None: ...
     PullTaskIns: grpc.UnaryUnaryMultiCallable[
         flwr.proto.fleet_pb2.PullTaskInsRequest,
-        flwr.proto.fleet_pb2.PullTaskInsResponse]
+        flwr.proto.fleet_pb2.PullTaskInsResponse,
+    ]
     """Retrieve one or more tasks, if possible
 
     HTTP API path: /api/v1/fleet/pull-task-ins
@@ -18,16 +19,17 @@ class FleetStub:
 
     PushTaskRes: grpc.UnaryUnaryMultiCallable[
         flwr.proto.fleet_pb2.PushTaskResRequest,
-        flwr.proto.fleet_pb2.PushTaskResResponse]
+        flwr.proto.fleet_pb2.PushTaskResResponse,
+    ]
     """Complete one or more tasks, if possible
 
     HTTP API path: /api/v1/fleet/push-task-res
     """
 
-
 class FleetServicer(metaclass=abc.ABCMeta):
     @abc.abstractmethod
-    def PullTaskIns(self,
+    def PullTaskIns(
+        self,
         request: flwr.proto.fleet_pb2.PullTaskInsRequest,
         context: grpc.ServicerContext,
     ) -> flwr.proto.fleet_pb2.PullTaskInsResponse:
@@ -36,9 +38,9 @@ class FleetServicer(metaclass=abc.ABCMeta):
         HTTP API path: /api/v1/fleet/pull-task-ins
         """
         pass
-
     @abc.abstractmethod
-    def PushTaskRes(self,
+    def PushTaskRes(
+        self,
         request: flwr.proto.fleet_pb2.PushTaskResRequest,
         context: grpc.ServicerContext,
     ) -> flwr.proto.fleet_pb2.PushTaskResResponse:
@@ -48,5 +50,6 @@ class FleetServicer(metaclass=abc.ABCMeta):
         """
         pass
 
-
-def add_FleetServicer_to_server(servicer: FleetServicer, server: grpc.Server) -> None: ...
+def add_FleetServicer_to_server(
+    servicer: FleetServicer, server: grpc.Server
+) -> None: ...
